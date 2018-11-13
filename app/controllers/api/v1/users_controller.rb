@@ -1,5 +1,46 @@
 class Api::V1::UsersController < ApplicationController
+    before_action :findUser, only: [:update, :destroy, :show]
+
     def index
-        render json: User.all
+        render json: {errors: "BAD USER! User list is private."}, status: 401
+    end
+
+    def show
+        render json: @user
+    end
+
+    def update
+        @user.update(userParams)
+        if @user.save
+            render json: {message: "User updated succesfully"}, status: :accepted
+        else
+            render json: { errors: "There was an error, please try again." }, status: :unprocessible_entity
+        end
+    end
+
+    def create
+        user = User.new(userParams)
+        if user.save
+            render json: {message: "User created succesfully"}, status: :created
+        else
+            render json: { errors: "There was an error, please try again." }, status: :unprocessible_entity
+        end
+    end
+
+    def destroy
+        if @user.destroy
+            render json: {message: "User deleted succesfully"}, status: :accepted
+        else
+            render json: { errors: "There was an error, please try again." }, status: :unprocessible_entity
+        end
+    end
+
+    private
+    def userParams
+        params.permit(:name, :username)
+    end
+
+    def findUser
+        @user = User.find(params[:id])
     end
 end
