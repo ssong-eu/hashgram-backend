@@ -22,7 +22,7 @@ class Api::V1::UsersController < ApplicationController
         if @user.save
             render json: {message: "User updated succesfully"}, status: :accepted
         else
-            render json: { errors: "There was an error, please try again." }, status: :unprocessible_entity
+            render json: { errors: "There was an error, please try again."}, status: :unprocessible_entity
         end
     end
 
