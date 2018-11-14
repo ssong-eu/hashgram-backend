@@ -13,9 +13,6 @@ gem 'puma', '~> 3.11'
 # Serializer
 gem 'active_model_serializers'
 
-# Encryption
-gem 'rbnacl'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
