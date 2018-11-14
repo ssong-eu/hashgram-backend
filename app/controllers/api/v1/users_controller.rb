@@ -45,7 +45,7 @@ class Api::V1::UsersController < ApplicationController
 
     private
     def userParams
-        params.permit(:name, :username)
+        params.permit(:usersignkey)
     end
 
     def findUser
