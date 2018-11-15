@@ -90,7 +90,7 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def findUser
-        user = User.find_by(params[:id])
+        user = User.find(params[:id])
         # user = get_current_user
     end
 end
