@@ -27,7 +27,7 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def create
-        user = User.new(userParams)
+        user = User.new(usersignkey: userParams["usersignkey"])
         if user.save
             render json: {message: "User created succesfully"}, status: :created
         else
