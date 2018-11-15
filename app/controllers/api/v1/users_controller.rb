@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
     before_action :findUser, only: [:update, :destroy, :show, :sent_messages, :received_messages]
 
     def index
-        render json: {errors: "BAD USER! User list is private."}, status: 401
+        render json: User.all
     end
 
     def show
