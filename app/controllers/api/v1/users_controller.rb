@@ -25,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def show
-        if user
+        if @user
             render json: @user
         else
             render json: {error: 'You are not signed in.'} 
