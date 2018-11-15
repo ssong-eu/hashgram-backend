@@ -26,7 +26,7 @@ class Api::V1::UsersController < ApplicationController
 
     def show
         if user
-            render json: user
+            render json: @user
         else
             render json: {error: 'You are not signed in.'} 
         end
@@ -90,7 +90,7 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def findUser
-        user = User.find(params[:id])
+        @user = User.find(params[:id])
         # user = get_current_user
     end
 end
