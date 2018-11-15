@@ -21,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
     
 
     def index
-        render json: {errors: "BAD USER! User list is private."}, status: 401
+        render json: User.all
     end
 
     def show
