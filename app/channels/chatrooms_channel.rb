@@ -1,5 +1,10 @@
 class ChatroomsChannel < ApplicationCable::Channel
     def subscribed
-        stream_from "api_v1_chatrooms_#{current_user.id}"
+        @chatroom = Chatroom.find_by(id: params[:chatroom])
+        stream_from @chatroom
+    end
+
+    def received(data)
+        ChatroomsChannel.broadcast_to(@chatroom, {chatroom: @chatroom, users:@chatroom.users})
     end
 end
