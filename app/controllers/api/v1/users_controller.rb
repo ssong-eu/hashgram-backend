@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApplicationController
     def sign_in
         user = User.find_by(username: params[:username])
         if user && user.authenticate(params[:password])
-            render json: {username: user.username, token: issue_token({id: user.id})}
+            render json: {id: user.id, token: issue_token({id: user.id})}
         else
             render json: {error: 'Invalid username/password combination.'}, status: 400
         end
@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
     def validate
     user = get_current_user
         if user
-            render json: {username: user.username, token: issue_token({id: user.id})}
+            render json: {id: user.id, token: issue_token({id: user.id})}
         else
             render json: {error: 'User not found.'}, status: 400
         end
@@ -65,7 +65,7 @@ class Api::V1::UsersController < ApplicationController
         user = User.new(userParams)
         if user.save
             # byebug
-            render json: {username: user.username, token: issue_token({id: user.id})}
+            render json: {id: user.id, token: issue_token({id: user.id})}
             # render json: {message: "User created succesfully"}, status: :created
         else
             render json: { errors: "There was an error, please try again." }, status: :unprocessible_entity
