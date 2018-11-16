@@ -17,7 +17,6 @@ class Api::V1::ChatroomsController < ApplicationController
     def create
         chatroom = Chatroom.new(name: chatroomParams["name"])
         chatroom.user_ids = chatroomParams["users"].split(",").map{|n| n.to_i}
-        byebug
         if chatroom.save
             render json: {message: "Chatroom created succesfully"}, status: :created
         else
