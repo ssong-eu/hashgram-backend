@@ -6,6 +6,6 @@ class ChatroomSerializer < ActiveModel::Serializer
         attributes :sender_id, :receiver_id, :message
     end
     class UserSerializer < ActiveModel::Serializer
-        attributes :id, :name, :username
+        attributes :id, :username
     end
 end
