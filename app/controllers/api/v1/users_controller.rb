@@ -54,7 +54,7 @@ class Api::V1::UsersController < ApplicationController
             if user.save
                 render json: {message: "User updated succesfully"}, status: :accepted
             else
-                render json: { errors: "There was an error, please try again."}, status: :unprocessible_entity
+                render json: { error: "There was an error, please try again."}, status: :unprocessible_entity
             end
         else
             render json: {error: 'You are not signed in.'} 
@@ -68,7 +68,7 @@ class Api::V1::UsersController < ApplicationController
             render json: {id: user.id, token: issue_token({id: user.id})}
             # render json: {message: "User created succesfully"}, status: :created
         else
-            render json: { errors: "There was an error, please try again." }, status: :unprocessible_entity
+            render json: { error: "There was an error, please try again." }, status: :unprocessible_entity
         end
     end
 
@@ -77,7 +77,7 @@ class Api::V1::UsersController < ApplicationController
             if user.destroy
                 render json: {message: "User deleted succesfully"}, status: :accepted
             else
-                render json: { errors: "There was an error, please try again." }, status: :unprocessible_entity
+                render json: { error: "There was an error, please try again." }, status: :unprocessible_entity
             end
         else
             render json: {error: 'You are not signed in.'} 
