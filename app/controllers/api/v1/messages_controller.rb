@@ -13,6 +13,10 @@ class Api::V1::MessagesController < ApplicationController
     def create
         message = Message.new(sender_id: messageParams["sender"].to_i, receiver_id: messageParams["receiver"].to_i, chatroom_id: messageParams["chatroom"].to_i, message: messageParams["message"])
         if message.save
+            ActionCable.server.broadcast 'messages',
+                message: message.message,
+                user: message.sender.username
+            head :ok
             render json: {message: "Message created succesfully"}, status: :created
         else
             render json: { errors: "There was an error, please try again." }, status: :unprocessible_entity
